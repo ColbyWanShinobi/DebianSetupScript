@@ -16,23 +16,26 @@ safe_kwriteconfig() {
 echo "Applying KDE Plasma 6 tweaks..."
 
 # Use dark theme
-#safe_kwriteconfig --file kdeglobals --group General --key ColorScheme "BreezeDark"
-#safe_kwriteconfig --file plasmarc --group Theme --key name "breeze-dark"
+safe_kwriteconfig --file kdeglobals --group General --key ColorScheme "BreezeDark"
+safe_kwriteconfig --file plasmarc --group Theme --key name "breeze-dark"
 
 # Always show thumbnail previews in Dolphin
-#safe_kwriteconfig --file dolphinrc --group "PreviewSettings" --key "Plugins" "appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail"
+safe_kwriteconfig --file dolphinrc --group "PreviewSettings" --key "Plugins" "appimagethumbnail,audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail"
 
 # Set locale to US (imperial units)
-#safe_kwriteconfig --file kdeglobals --group Locale --key Measurement "1" # 1 = Imperial, 0 = Metric
+safe_kwriteconfig --file kdeglobals --group Locale --key Measurement "1" # 1 = Imperial, 0 = Metric
 
 # Enable window control buttons (close, minimize, maximize) and move to left like macOS
 # X = close, N = minimize, A = maximize, M = menu
-#safe_kwriteconfig --file kwinrc --group "org.kde.kdecoration2" --key "ButtonsOnLeft" "XNA"
-#safe_kwriteconfig --file kwinrc --group "org.kde.kdecoration2" --key "ButtonsOnRight" ""
+safe_kwriteconfig --file kwinrc --group "org.kde.kdecoration2" --key "ButtonsOnLeft" "XNA"
+safe_kwriteconfig --file kwinrc --group "org.kde.kdecoration2" --key "ButtonsOnRight" ""
 
 # Change touchpad scroll direction (disable natural scroll)
 # Note: Touchpad device path may vary - this is a generic approach
 safe_kwriteconfig --file touchpadxlibinputrc --group "Libinput" --key "NaturalScroll" "false"
+
+# Set the number of virtual desktops to one
+safe_kwriteconfig --file kwinrc --group Desktops --key Number "1"
 
 # Disable screen edges (equivalent to hot corners)
 safe_kwriteconfig --file kwinrc --group ScreenEdges --key "Left" "None"
@@ -51,26 +54,26 @@ safe_kwriteconfig --file touchpadxlibinputrc --group "Libinput" --key "ScrollMet
 safe_kwriteconfig --file touchpadxlibinputrc --group "Libinput" --key "NaturalScroll" "false"
 
 # Enable window tiling
-#safe_kwriteconfig --file kwinrc --group Windows --key "ElectricBorderTiling" "true"
-#safe_kwriteconfig --file kwinrc --group Windows --key "ElectricBorderMaximize" "true"
+safe_kwriteconfig --file kwinrc --group Windows --key "ElectricBorderTiling" "true"
+safe_kwriteconfig --file kwinrc --group Windows --key "ElectricBorderMaximize" "true"
 
 # Disable dynamic workspaces (use fixed number)
 safe_kwriteconfig --file kwinrc --group Desktops --key Number "1"
 
 # Terminal settings (Konsole)
-#safe_kwriteconfig --file konsolerc --group "Desktop Entry" --key "DefaultProfile" "default.profile"
-#safe_kwriteconfig --file konsole/default.profile --group General --key "Environment" "TERM=xterm-256color"
+safe_kwriteconfig --file konsolerc --group "Desktop Entry" --key "DefaultProfile" "default.profile"
+safe_kwriteconfig --file konsole/default.profile --group General --key "Environment" "TERM=xterm-256color"
 
 # Default Konsole size
-#safe_kwriteconfig --file konsolerc --group "MainWindow" --key "width" "1920"
-#safe_kwriteconfig --file konsolerc --group "MainWindow" --key "height" "1080"
+safe_kwriteconfig --file konsolerc --group "MainWindow" --key "width" "1920"
+safe_kwriteconfig --file konsolerc --group "MainWindow" --key "height" "1080"
 
 # Enable experimental features (variable refresh rate, etc.)
-#safe_kwriteconfig --file kwinrc --group Compositing --key "LatencyPolicy" "Low"
-#safe_kwriteconfig --file kwinrc --group Compositing --key "RenderTimeEstimator" "1"
+safe_kwriteconfig --file kwinrc --group Compositing --key "LatencyPolicy" "Low"
+safe_kwriteconfig --file kwinrc --group Compositing --key "RenderTimeEstimator" "1"
 
 # File chooser - show hidden files
-#safe_kwriteconfig --file kdeglobals --group KFileDialog --key "ShowHidden" "true"
+safe_kwriteconfig --file kdeglobals --group KFileDialog --key "ShowHidden" "true"
 
 # Apple Fonts Configuration (equivalent to install-apple-fonts.sh settings)
 # Set SF Pro Display as the default system font
@@ -106,6 +109,7 @@ echo "Restarting plasmashell to apply changes..."
 kquitapp6 plasmashell 2>/dev/null || kquitapp5 plasmashell 2>/dev/null || killall plasmashell 2>/dev/null || true
 sleep 2
 plasmashell --replace &
+disown
 
 echo "KDE Plasma 6 tweaks applied. You may need to log out and back in for all changes to take effect."
 echo "Note: Some settings may require a full logout/login to take effect properly."

@@ -3,7 +3,7 @@
 set -e -x
 
 sudo apt update
-sudo apt install -y gpg python3-gpg python3-full
+sudo apt install -y gpg python3-gpg
 
 #Install Dropbox
 if [ ! -x "$(command -v dropbox)" ];then

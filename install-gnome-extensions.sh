@@ -59,8 +59,10 @@ extlist=(
 "https://extensions.gnome.org/extension/5964/quick-settings-audio-devices-hider/"
 "https://extensions.gnome.org/extension/1183/utcclock/"
 "https://extensions.gnome.org/extension/3733/tiling-assistant/"
-"https://extensions.gnome.org/extension/7603/advanced-weather-companion/"
+#"https://extensions.gnome.org/extension/7603/advanced-weather-companion/"
 #"https://extensions.gnome.org/extension/7215/restart-to/"
+"https://extensions.gnome.org/extension/3928/auto-select-headset/"
+"https://extensions.gnome.org/extension/8261/simpleweather/"
 )
 
 CURRENT_GNOME_VERSION=$(gnome-shell --version | grep -oP '\d+\.\d+' | head -1 | cut -f1 -d.)
